@@ -1,5 +1,11 @@
+//for filter the original data to get only the date and also getting the required stats from the data
 app.filter('dateFilter',function(){
     
+    /**Params:
+    *data - fetched data from GIT
+    *retList - the stats object to be returned
+    *timestamp - the value of timestamp which is taken as a reference to calculate the stats
+    **/
     return function(data,retList,timestamp){
     
         for(var i=0; i< data.length;i++){

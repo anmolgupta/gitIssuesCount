@@ -7,10 +7,6 @@ app.config(['$routeProvider',
         templateUrl: '../partials/gitURL.html',
         controller: 'gitUrlController'
       }).
-      when('/phones/:phoneId', {
-        templateUrl: 'partials/phone-detail.html',
-        controller: 'PhoneDetailCtrl'
-      }).
       otherwise({
         redirectTo: '/'
       });
