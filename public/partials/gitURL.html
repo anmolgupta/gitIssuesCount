@@ -1,0 +1,30 @@
+
+Enter GIT URL:  <input type="text" ng-model='gitURL'>
+<br/><button ng-click='fetchData()' ng-hide='loading'> Submit</button>
+
+<div ng-show='loading'>
+    Loading....
+</div>
+
+<br/><br/>
+<div ng-show="dataAvailable">
+    
+    <table border='1'  style="width:50%">
+        <tr>
+            <td>Total issues </td><td> {{data.totalIssues}}</td>
+        </tr>
+        
+        <tr>
+            <td>Issues that were opened in the last 24 hours</td><td> {{data.issuesInLast24Hours}}</td>
+        </tr>
+        
+        <tr>
+            <td>Issues that were opened more than 24 hours ago but less than 7 days ago</td><td>  {{data.issues24to7}}</td>
+        </tr>
+        
+        <tr>
+            <td>Issues that were opened more than 7 days ago</td><td> {{data.issues7daysAgo}}</td>
+        </tr>
+    </table>
+    
+</div>

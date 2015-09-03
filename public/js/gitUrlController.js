@@ -1,7 +1,7 @@
 app.controller('gitUrlController',['$http','$scope','$filter','$window',function($http,$scope,$filter,$window){
     
     //function to get the JSON from the defined URL.
-    var getData = function(param,url,error){
+    var getData = function(param,url,errorFunction){
         
         $http.get(url).
                 then(function(response) {
@@ -10,7 +10,7 @@ app.controller('gitUrlController',['$http','$scope','$filter','$window',function
                     
                 }, function(error) {
                 
-                    $window.alert('URL not found');
+                    errorFunction(error)
                     
                 });
     }
@@ -33,6 +33,12 @@ app.controller('gitUrlController',['$http','$scope','$filter','$window',function
         var res = gitURL.split('github.com/')
         var url = 'https://api.github.com/repos/'+res[1]; //constructing the GIT API url
         
+        //errro callback function
+        var errorFunction = function(error){
+            $window.alert('URL not found');
+            $scope.loading = false;
+        }
+        
         //callback function for getting the response.
         var calcData = function(response){
             
@@ -52,7 +58,7 @@ app.controller('gitUrlController',['$http','$scope','$filter','$window',function
             
             if(data.length == 100){    
                 pageNo++;
-                getData(calcData,url+"?page="+pageNo+"&per_page="+maximum+"&state=open");
+                getData(calcData,url+"?page="+pageNo+"&per_page="+maximum+"&state=open",errorFunction);
                 
             }else{
             
@@ -62,7 +68,7 @@ app.controller('gitUrlController',['$http','$scope','$filter','$window',function
             }
         }
         
-        getData(calcData,url+"?page="+pageNo+"&per_page="+maximum+"&state=open");
+        getData(calcData,url+"?page="+pageNo+"&per_page="+maximum+"&state=open",errorFunction);
     }
     
 }])
