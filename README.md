@@ -5,4 +5,4 @@ It is a front end application developed using Angular. Getting the data and mani
 
 Node.js is used to serve angular from backend.
 
-The URL to view the result is : 
+The URL to view the result is : https://gitissuecount.herokuapp.com/
