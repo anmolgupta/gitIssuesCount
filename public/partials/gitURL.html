@@ -3,7 +3,7 @@ Enter GIT URL:  <input type="text" ng-model='gitURL'>
 <br/><button ng-click='fetchData()' ng-hide='loading'> Submit</button>
 
 <div ng-show='loading'>
-    Loading....
+    Got <b>{{data.totalIssues}}</b> Issues and still Counting....
 </div>
 
 <br/><br/>

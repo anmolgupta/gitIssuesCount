@@ -1,3 +1,6 @@
+'use strict';
+/* global require, module,app*/
+/* jshint node:true*/
 //for filter the original data to get only the date and also getting the required stats from the data
 app.filter('dateFilter',function(){
     
@@ -7,11 +10,15 @@ app.filter('dateFilter',function(){
     *timestamp - the value of timestamp which is taken as a reference to calculate the stats
     **/
     return function(data,retList,timestamp){
-    
-        for(var i=0; i< data.length;i++){
+
+
+        data.forEach(item=>{
+
+            if(item.pull_request){
+                return;
+            }
             
-            var created_at = new Date(data[i].created_at).getTime();
-            
+            var created_at = new Date(item.created_at).getTime();
             
             retList.totalIssues++;
             
@@ -22,8 +29,8 @@ app.filter('dateFilter',function(){
                 retList.issues24to7++;
             
             if(created_at < (timestamp - (7*24*60*60*1000)))
-                retList.issues7daysAgo++
-        }
+                retList.issues7daysAgo++;
+        });
         
         return retList;
     };

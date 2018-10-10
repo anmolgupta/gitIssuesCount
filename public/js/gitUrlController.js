@@ -59,24 +59,24 @@ app.controller('gitUrlController',['$http','$scope','$filter','$window',function
                 return;
             }
 
-            console.log(data.length);
+            // console.log(data.length);
             
             //getting stats from the data fetched.
             $scope.data = $filter('dateFilter')(data,$scope.data,timestamp);
             
             if(data.length == 100){    
                 pageNo++;
-                getData(calcData,url+"?page="+pageNo+"&per_page="+maximum+"&state=open",errorFunction);
+                getData(calcData,url+"?page="+pageNo+"&per_page="+maximum+"&state=open&access_token=9963eaed99a8414c2df38b2bdb34a28bc9eb6678",errorFunction);
                 
             }else{
             
-                console.log(JSON.stringify($scope.data));
+                // console.log(JSON.stringify($scope.data));
                 $scope.loading = false;
                 $scope.dataAvailable = true;
             }
         };
         
-        getData(calcData,url+"?page="+pageNo+"&per_page="+maximum+"&state=open",errorFunction);
+        getData(calcData,url+"?page="+pageNo+"&per_page="+maximum+"&state=open&access_token=9963eaed99a8414c2df38b2bdb34a28bc9eb6678",errorFunction);
     };
     
 }]);
