@@ -1,3 +1,7 @@
+'use strict';
+/* global require, module,app*/
+/* jshint node:true*/
+
 app.controller('gitUrlController',['$http','$scope','$filter','$window',function($http,$scope,$filter,$window){
     
     //function to get the JSON from the defined URL.
@@ -10,10 +14,10 @@ app.controller('gitUrlController',['$http','$scope','$filter','$window',function
                     
                 }, function(error) {
                 
-                    errorFunction(error)
+                    errorFunction(error);
                     
                 });
-    }
+    };
     
     //Function which is called on pressing submit button from front end
     $scope.fetchData = function(){
@@ -30,14 +34,18 @@ app.controller('gitUrlController',['$http','$scope','$filter','$window',function
         
         var gitURL = $scope.gitURL; 
         
-        var res = gitURL.split('github.com/')
-        var url = 'https://api.github.com/repos/'+res[1]; //constructing the GIT API url
+        var res = gitURL.split('github.com/');
+
+
+        var gitRepoName = res[1].split("/");
+
+        var url = 'https://api.github.com/repos/'+gitRepoName[0]+"/"+gitRepoName[1]+"/issues"; //constructing the GIT API url
         
         //errro callback function
-        var errorFunction = function(error){
+        var errorFunction = function(){
             $window.alert('URL not found');
             $scope.loading = false;
-        }
+        };
         
         //callback function for getting the response.
         var calcData = function(response){
@@ -51,7 +59,7 @@ app.controller('gitUrlController',['$http','$scope','$filter','$window',function
                 return;
             }
 
-            console.log(data.length)
+            console.log(data.length);
             
             //getting stats from the data fetched.
             $scope.data = $filter('dateFilter')(data,$scope.data,timestamp);
@@ -62,13 +70,13 @@ app.controller('gitUrlController',['$http','$scope','$filter','$window',function
                 
             }else{
             
-                console.log(JSON.stringify($scope.data))
+                console.log(JSON.stringify($scope.data));
                 $scope.loading = false;
                 $scope.dataAvailable = true;
             }
-        }
+        };
         
         getData(calcData,url+"?page="+pageNo+"&per_page="+maximum+"&state=open",errorFunction);
-    }
+    };
     
-}])
+}]);
